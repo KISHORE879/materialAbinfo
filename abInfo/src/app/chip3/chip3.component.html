@@ -1,0 +1,51 @@
+<mat-card>
+
+
+
+
+  <mat-horizontal-stepper linear #stepper>
+    <!-- <mat-step [stepControl]="secondFormGroup" [editable]="isEditable"> -->
+    <mat-step>
+      <!-- <form [formGroup]="secondFormGroup"> -->
+      <form>
+        <ng-template matStepLabel>Escalates after
+
+          <mat-form-field>
+            0
+            <input matInput formControlName="firstCtrl" required>
+          </mat-form-field>Minitues
+
+          <span class="material-icons">
+            remove_circle_outline
+            </span>
+
+        </ng-template>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+
+  <mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+        (removed)="remove(fruit)">
+        {{fruit}}
+        <mat-icon matChipRemove *ngIf="removable"></mat-icon>
+      </mat-chip>
+      <input placeholder="Escalate to team" #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+        [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+        {{fruit}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+  <app-chip4></app-chip4>
+  No schedules found.click <a href="#">here</a> to create a new schedule.
+
+</mat-card>
